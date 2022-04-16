@@ -30,7 +30,7 @@ class Course(models.Model):
 
     def __str__(self):
         """Returns a string representation of the course, including the course code and title."""
-        return self.course_code + ": " + self.title
+        return self.school.name + ": " + self.course_code + " - " + self.title
 
 
 class Review(models.Model):
@@ -52,15 +52,15 @@ class Review(models.Model):
     ]
 
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    term = models.CharField(choices=TERM_CHOICES)
-    year = models.PositiveIntegerField(validators=[validate_year])
+    term = models.CharField(max_length=6, choices=TERM_CHOICES)
+    year = models.PositiveIntegerField(validators=[validate_year], default=date.today().year)
     workload = models.PositiveIntegerField()
     difficulty = models.PositiveIntegerField(choices=RATING_CHOICES)
     rating = models.PositiveIntegerField(choices=RATING_CHOICES)
-    text = models.TextField
+    text = models.TextField()
     review_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         """Returns a string representation of the course, including the course code and title."""
-        return self.course_code + ": " + self.title
+        return f"{self.course.school.name} ({self.course.course_code}): {self.text[:50]}..."
 
