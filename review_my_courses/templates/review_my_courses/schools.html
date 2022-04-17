@@ -1,0 +1,22 @@
+{% extends 'review_my_courses/base.html' %}
+
+{% block content %}
+
+    <p>Schools</p>
+    <table>
+        <tr>
+            <th>School Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        {% for school in schools %}
+            <tr>
+                <td>{{ school.name }}<td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock content %}
