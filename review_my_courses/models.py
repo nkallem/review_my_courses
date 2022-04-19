@@ -14,7 +14,7 @@ def validate_year(value):
 
 class School(models.Model):
     """The school that offers the course to be reviewed."""
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -77,6 +77,11 @@ class Course(models.Model):
     def __str__(self):
         """Returns a string representation of the course, including the course code and title."""
         return self.school.name + ": " + self.course_code + " - " + self.title
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['school_id', 'title', 'course_code'], name='unique_course')
+        ]
 
     @property
     def total_reviews(self):
