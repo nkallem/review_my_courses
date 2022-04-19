@@ -1,0 +1,11 @@
+{% extends "review_my_courses/base.html" %}
+
+{% block content %}
+    <p>Add a new school:</p>
+    <form action="{% url 'review_my_courses:new_school' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">Add school</button>
+    </form>
+
+{% endblock %}

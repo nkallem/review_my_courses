@@ -1,6 +1,7 @@
 {% extends 'review_my_courses/base.html' %}
 
 {% block content %}
+
     <p>Reviews</p>
     <p>School: {{ school.name }}</p>
     <p>Course Code: {{ course.course_code }}</p>
@@ -14,8 +15,5 @@
         <p>Rating: {{ review.rating }}</p>
         <p>Review: {{ review.text }}</p>
     {% endfor %}
-
-
-
 
 {% endblock content %}
