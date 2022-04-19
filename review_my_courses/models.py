@@ -21,6 +21,51 @@ class School(models.Model):
         """Return a string representation of the school."""
         return self.name
 
+    @property
+    def total_courses(self):
+        """Return the count of courses for a school."""
+        return self.course_set.count()
+
+    @property
+    def total_reviews(self):
+        """Return the count of reviews for a school."""
+        course_count = 0
+        for course in self.course_set.all():
+            course_count += course.total_reviews
+
+        return course_count
+
+    @property
+    def average_workload(self):
+        """Return the average workload for all reviews at the school."""
+        workload_values = [review.workload for course in self.course_set.all() for review in course.review_set.all()]
+
+        if len(workload_values) == 0:
+            return None
+
+        return round(sum(workload_values) / len(workload_values), 2)
+
+    @property
+    def average_difficulty(self):
+        """Return the average difficulty for all courses at the school."""
+        difficulty_values = [review.difficulty for course in self.course_set.all()
+                             for review in course.review_set.all()]
+
+        if len(difficulty_values) == 0:
+            return None
+
+        return round(sum(difficulty_values) / len(difficulty_values), 2)
+
+    @property
+    def average_rating(self):
+        """Return the average rating for all courses at the school."""
+        ratings = [review.rating for course in self.course_set.all() for review in course.review_set.all()]
+
+        if len(ratings) == 0:
+            return None
+
+        return round(sum(ratings) / len(ratings), 2)
+
 
 class Course(models.Model):
     """Represents a course that can be reviewed."""
@@ -41,17 +86,29 @@ class Course(models.Model):
     @property
     def average_workload(self):
         """Return the average review rating of a course."""
-        return self.review_set.all().aggregate(Avg('workload'))['workload__avg']
+        value = self.review_set.all().aggregate(Avg('workload'))['workload__avg']
+        if value:
+            value = round(value, 2)
+
+        return value
 
     @property
     def average_difficulty(self):
         """Return the average review rating of a course."""
-        return self.review_set.all().aggregate(Avg('difficulty'))['difficulty__avg']
+        value = self.review_set.all().aggregate(Avg('difficulty'))['difficulty__avg']
+        if value:
+            value = round(value, 2)
+
+        return value
 
     @property
     def average_rating(self):
         """Return the average review rating of a course."""
-        return self.review_set.all().aggregate(Avg('rating'))['rating__avg']
+        value = self.review_set.all().aggregate(Avg('rating'))['rating__avg']
+        if value:
+            value = round(value, 2)
+
+        return value
 
 
 class Review(models.Model):

@@ -6,13 +6,23 @@
     <table>
         <tr>
             <th>School Name</th>
+            <th>Total Courses</th>
+            <th>Total Reviews</th>
+            <th>Difficulty (1-5)</th>
+            <th>Workload (hrs/week)</th>
+            <th>Rating (1-5)</th>
             <th></th>
             <th></th>
         </tr>
 
         {% for school in schools %}
             <tr>
-                <td><a href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a><td>
+                <td><a href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a></td>
+                <td>{{ school.total_courses }}</td>
+                <td>{{ school.total_reviews }}</td>
+                <td>{{ school.average_difficulty|default_if_none:"N/A" }}</td>
+                <td>{{ school.average_workload|default_if_none:"N/A" }}</td>
+                <td>{{ school.average_rating|default_if_none:"N/A" }}</td>
                 <td>Edit</td>
                 <td>Delete</td>
             </tr>
