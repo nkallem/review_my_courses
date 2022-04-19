@@ -1,0 +1,30 @@
+{% extends 'review_my_courses/base.html' %}
+
+{% block content %}
+    <p>School: {{ school.name }}</p>
+
+    <p>Courses:</p>
+    <table>
+        <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>Total Reviews</th>
+            <th>Difficulty (1-5)</th>
+            <th>Workload (hrs/week)</th>
+            <th>Rating (1-5)</th>
+        </tr>
+
+        {% for course in courses %}
+            <tr>
+                <td>{{ course.course_code }}</td>
+                <td>{{ course.title }}</td>
+                <td>{{ course.total_reviews }}</td>
+                <td>{{ course.average_difficulty|default_if_none:"N/A" }}</td>
+                <td>{{ course.average_workload|default_if_none:"N/A" }}</td>
+                <td>{{ course.average_rating|default_if_none:"N/A" }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock content %}

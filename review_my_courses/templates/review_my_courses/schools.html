@@ -12,7 +12,7 @@
 
         {% for school in schools %}
             <tr>
-                <td>{{ school.name }}<td>
+                <td><a href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a><td>
                 <td>Edit</td>
                 <td>Delete</td>
             </tr>

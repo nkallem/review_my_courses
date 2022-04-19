@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 from django.core.exceptions import ValidationError
 from datetime import date
 
@@ -31,6 +32,26 @@ class Course(models.Model):
     def __str__(self):
         """Returns a string representation of the course, including the course code and title."""
         return self.school.name + ": " + self.course_code + " - " + self.title
+
+    @property
+    def total_reviews(self):
+        """Return the count of reviews for a course."""
+        return self.review_set.count()
+
+    @property
+    def average_workload(self):
+        """Return the average review rating of a course."""
+        return self.review_set.all().aggregate(Avg('workload'))['workload__avg']
+
+    @property
+    def average_difficulty(self):
+        """Return the average review rating of a course."""
+        return self.review_set.all().aggregate(Avg('difficulty'))['difficulty__avg']
+
+    @property
+    def average_rating(self):
+        """Return the average review rating of a course."""
+        return self.review_set.all().aggregate(Avg('rating'))['rating__avg']
 
 
 class Review(models.Model):

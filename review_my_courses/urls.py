@@ -10,4 +10,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     # Page that shows all schools.
     path('schools/', views.schools, name='schools'),
+    # Detail page for a single school.
+    path('schools/<int:school_id>/', views.school, name='school')
 ]

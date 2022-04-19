@@ -12,3 +12,11 @@ def schools(request):
     schools = School.objects.order_by('name')
     context = {'schools': schools}
     return render(request, 'review_my_courses/schools.html', context)
+
+
+def school(request, school_id):
+    """Show a school and all its associated courses."""
+    school = School.objects.get(id=school_id)
+    courses = school.course_set.order_by('course_code')
+    context = {'school': school, 'courses': courses}
+    return render(request, 'review_my_courses/school.html', context)
