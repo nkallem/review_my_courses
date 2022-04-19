@@ -16,7 +16,7 @@
 
         {% for course in courses %}
             <tr>
-                <td>{{ course.course_code }}</td>
+                <td><a href="{% url 'review_my_courses:course' course.id %}">{{ course.course_code }}</a></td>
                 <td>{{ course.title }}</td>
                 <td>{{ course.total_reviews }}</td>
                 <td>{{ course.average_difficulty|default_if_none:"N/A" }}</td>

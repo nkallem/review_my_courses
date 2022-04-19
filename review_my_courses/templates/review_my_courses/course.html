@@ -1,0 +1,21 @@
+{% extends 'review_my_courses/base.html' %}
+
+{% block content %}
+    <p>Reviews</p>
+    <p>School: {{ school.name }}</p>
+    <p>Course Code: {{ course.course_code }}</p>
+    <p>Course Title: {{ course.title }}</p>
+    {% for review in reviews %}
+        <hr>
+        <p>Review Date: {{ review.review_date }}</p>
+        <p>Term: {{ review.term.title }} {{ review.year }}</p>
+        <p>Difficulty: {{ review.difficulty }}</p>
+        <p>Workload (hrs/week): {{ review.workload }}</p>
+        <p>Rating: {{ review.rating }}</p>
+        <p>Review: {{ review.text }}</p>
+    {% endfor %}
+
+
+
+
+{% endblock content %}

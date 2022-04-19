@@ -11,5 +11,7 @@ urlpatterns = [
     # Page that shows all schools.
     path('schools/', views.schools, name='schools'),
     # Detail page for a single school.
-    path('schools/<int:school_id>/', views.school, name='school')
+    path('schools/<int:school_id>/', views.school, name='school'),
+    # Detail page for a single course.
+    path('courses/<int:course_id>/', views.course, name='course'),
 ]
