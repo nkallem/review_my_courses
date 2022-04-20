@@ -23,7 +23,7 @@
                 <td><a href="{% url 'review_my_courses:course' course.id %}">{{ course.course_code }}</a></td>
                 <td>{{ course.title }}</td>
                 <td><a href="{% url 'review_my_courses:edit_course' course.id %}">Edit</a></td>
-                <td>Delete</td>
+                <td><a href="{% url 'review_my_courses:delete_course' course.id %}">Delete</a></td>
                 <td>{{ course.total_reviews }}</td>
                 <td>{{ course.average_difficulty|default_if_none:"N/A" }}</td>
                 <td>{{ course.average_workload|default_if_none:"N/A" }}</td>

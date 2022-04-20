@@ -149,3 +149,26 @@ def edit_review(request, review_id):
     context = {'school': school, 'course': course, 'review': review, 'form': form}
     return render(request, 'review_my_courses/edit_review.html', context)
 
+
+def delete_school(request, school_id):
+    """Delete an existing school."""
+    school = School.objects.get(id=school_id)
+    school.delete()
+    return redirect('review_my_courses:schools')
+
+
+def delete_course(request, course_id):
+    """Delete an existing course."""
+    course = Course.objects.get(id=course_id)
+    school = course.school
+    course.delete()
+    return redirect('review_my_courses:school', school_id=school.id)
+
+
+def delete_review(request, review_id):
+    """Delete an existing review."""
+    review = Review.objects.get(id=review_id)
+    course = review.course
+    review.delete()
+    return redirect('review_my_courses:course', course_id=course.id)
+

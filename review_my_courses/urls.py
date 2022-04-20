@@ -26,4 +26,10 @@ urlpatterns = [
     path('edit_course/<int:course_id>/', views.edit_course, name='edit_course'),
     # Page for editing a review.
     path('edit_review/<int:review_id>/', views.edit_review, name='edit_review'),
+    # URL for deleting a school.
+    path('delete_school/<int:school_id>/', views.delete_school, name='delete_school'),
+    # URL for deleting a course.
+    path('delete_course/<int:course_id>/', views.delete_course, name='delete_course'),
+    # URL for deleting a review.
+    path('delete_review/<int:review_id>/', views.delete_review, name='delete_review'),
 ]
