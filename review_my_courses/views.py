@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Course, School, Review
-from .forms import SchoolForm
+from .forms import CourseForm, SchoolForm
 
 
 def index(request):
@@ -47,3 +47,22 @@ def new_school(request):
     # Display a blank or invalid form
     context = {'form': form}
     return render(request, 'review_my_courses/new_school.html', context)
+
+
+def new_course(request, school_id):
+    """Add a new course"""
+    school = School.objects.get(id=school_id)
+
+    if request.method != 'POST':
+        # No data submitted; create a blank form.
+        form = CourseForm(initial={'school': school})
+    else:
+        # POST data submitted; process data.
+        form = CourseForm(data=request.POST, initial={'school': school})
+        if form.is_valid():
+            form.save()
+            return redirect('review_my_courses:school', school_id=school_id)
+
+    # Display a blank or invalid form
+    context = {'school': school, 'form': form}
+    return render(request, 'review_my_courses/new_course.html', context)

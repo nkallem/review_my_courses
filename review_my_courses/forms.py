@@ -7,4 +7,13 @@ class SchoolForm(forms.ModelForm):
     class Meta:
         model = School
         fields = ['name']
-        labels = {'name' : 'School name'}
+        labels = {'name': 'School name'}
+
+
+class CourseForm(forms.ModelForm):
+    """Defines a form for Course objects."""
+    class Meta:
+        model = Course
+        fields = ['school', 'course_code', 'title']
+        labels = {'title': 'Course title'}
+        widgets = {'school': forms.HiddenInput()}

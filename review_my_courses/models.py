@@ -78,10 +78,13 @@ class Course(models.Model):
         """Returns a string representation of the course, including the course code and title."""
         return self.school.name + ": " + self.course_code + " - " + self.title
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['school_id', 'title', 'course_code'], name='unique_course')
-        ]
+    def validate_unique(self, *args, **kwargs):
+        super().validate_unique(*args, **kwargs)
+        if self.__class__.objects.filter(school=self.school, course_code=self.course_code, title=self.title).exists():
+            raise ValidationError(
+                message='A course with this school, code, and title already exists.',
+                code='Invalid Course',
+            )
 
     @property
     def total_reviews(self):

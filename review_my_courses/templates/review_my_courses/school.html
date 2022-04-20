@@ -3,6 +3,10 @@
 {% block content %}
     <p>School: {{ school.name }}</p>
 
+    <p>
+        <a href="{% url 'review_my_courses:new_course' school.id %}">Add a new course</a>
+    </p>
+
     <p>Courses:</p>
     <table>
         <tr>
