@@ -128,3 +128,24 @@ def edit_course(request, course_id):
     context = {'school': school, 'course': course, 'form': form}
     return render(request, 'review_my_courses/edit_course.html', context)
 
+
+def edit_review(request, review_id):
+    """Edit an existing review."""
+    review = Review.objects.get(id=review_id)
+    course = review.course
+    school = course.school
+
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current review.
+        form = ReviewForm(instance=review)
+    else:
+        # POST data submitted; process data.
+        form = ReviewForm(instance=review, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('review_my_courses:course', course_id=course.id)
+
+    # Display a blank or invalid form
+    context = {'school': school, 'course': course, 'review': review, 'form': form}
+    return render(request, 'review_my_courses/edit_review.html', context)
+

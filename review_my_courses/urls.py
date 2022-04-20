@@ -24,4 +24,6 @@ urlpatterns = [
     path('edit_school/<int:school_id>/', views.edit_school, name='edit_school'),
     # Page for editing a course.
     path('edit_course/<int:course_id>/', views.edit_course, name='edit_course'),
+    # Page for editing a review.
+    path('edit_review/<int:review_id>/', views.edit_review, name='edit_review'),
 ]

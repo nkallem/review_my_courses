@@ -1,0 +1,14 @@
+{% extends "review_my_courses/base.html" %}
+
+{% block content %}
+
+    <p><a href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a></p>
+    <p><a href="{% url 'review_my_courses:course' course.id %}">{{ course.course_code }}: {{ course.title }} </a></p>
+    <p>Add a new review:</p>
+    <form action="{% url 'review_my_courses:edit_review' review.id %}" method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name='submit'>Edit review</button>
+    </form>
+
+{% endblock content %}
