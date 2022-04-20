@@ -9,7 +9,7 @@
     <p><a href="{% url 'review_my_courses:new_review' course.id %}">Add a new review</a></p>
     {% for review in reviews %}
         <hr>
-        <p>Review Date: {{ review.review_date }}</p>
+        <p>Review Date: {{ review.review_date|date:'M d, Y' }}</p>
         <p>Term: {{ review.term.title }} {{ review.year }}</p>
         <p>Difficulty: {{ review.difficulty }}</p>
         <p>Workload (hrs/week): {{ review.workload }}</p>
