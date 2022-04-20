@@ -18,4 +18,6 @@ urlpatterns = [
     path('new_school/', views.new_school, name='new_school'),
     # Page for adding a new course.
     path('new_course/<int:school_id>/', views.new_course, name='new_course'),
+    # Page for adding a new review.
+    path('new_review/<int:course_id>/', views.new_review, name='new_review'),
 ]

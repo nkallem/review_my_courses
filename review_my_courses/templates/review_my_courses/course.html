@@ -2,10 +2,11 @@
 
 {% block content %}
 
-    <p>Reviews</p>
-    <p>School: {{ school.name }}</p>
+    <p>School: <a href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a></p>
     <p>Course Code: {{ course.course_code }}</p>
     <p>Course Title: {{ course.title }}</p>
+    <p>Reviews</p>
+    <p><a href="{% url 'review_my_courses:new_review' course.id %}">Add a new review</a></p>
     {% for review in reviews %}
         <hr>
         <p>Review Date: {{ review.review_date }}</p>

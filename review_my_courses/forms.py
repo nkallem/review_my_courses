@@ -17,3 +17,12 @@ class CourseForm(forms.ModelForm):
         fields = ['school', 'course_code', 'title']
         labels = {'title': 'Course title'}
         widgets = {'school': forms.HiddenInput()}
+
+
+class ReviewForm(forms.ModelForm):
+    """Defines a form for Review objects."""
+    class Meta:
+        model = Review
+        fields = ['term', 'year', 'workload', 'difficulty', 'rating', 'text']
+        labels = {'text': 'Review'}
+        widgets = {'text': forms.Textarea(attrs={'cols': 80})}
