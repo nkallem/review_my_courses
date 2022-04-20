@@ -20,4 +20,6 @@ urlpatterns = [
     path('new_course/<int:school_id>/', views.new_course, name='new_course'),
     # Page for adding a new review.
     path('new_review/<int:course_id>/', views.new_review, name='new_review'),
+    # Page for editing a school.
+    path('edit_school/<int:school_id>/', views.edit_school, name='edit_school'),
 ]

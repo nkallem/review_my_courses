@@ -25,7 +25,7 @@
                 <td>{{ school.average_difficulty|default_if_none:"N/A" }}</td>
                 <td>{{ school.average_workload|default_if_none:"N/A" }}</td>
                 <td>{{ school.average_rating|default_if_none:"N/A" }}</td>
-                <td>Edit</td>
+                <td><a href="{% url 'review_my_courses:edit_school' school.id %}">Edit</a></td>
                 <td>Delete</td>
             </tr>
         {% endfor %}
