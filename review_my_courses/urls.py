@@ -22,4 +22,6 @@ urlpatterns = [
     path('new_review/<int:course_id>/', views.new_review, name='new_review'),
     # Page for editing a school.
     path('edit_school/<int:school_id>/', views.edit_school, name='edit_school'),
+    # Page for editing a course.
+    path('edit_course/<int:course_id>/', views.edit_course, name='edit_course'),
 ]

@@ -11,7 +11,7 @@
     <table>
         <tr>
             <th>Course Code</th>
-            <th>Course Title</th>
+            <th colspan="3">Course Title</th>
             <th>Total Reviews</th>
             <th>Difficulty (1-5)</th>
             <th>Workload (hrs/week)</th>
@@ -22,6 +22,8 @@
             <tr>
                 <td><a href="{% url 'review_my_courses:course' course.id %}">{{ course.course_code }}</a></td>
                 <td>{{ course.title }}</td>
+                <td><a href="{% url 'review_my_courses:edit_course' course.id %}">Edit</a></td>
+                <td>Delete</td>
                 <td>{{ course.total_reviews }}</td>
                 <td>{{ course.average_difficulty|default_if_none:"N/A" }}</td>
                 <td>{{ course.average_workload|default_if_none:"N/A" }}</td>

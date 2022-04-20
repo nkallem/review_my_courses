@@ -80,7 +80,9 @@ class Course(models.Model):
 
     def validate_unique(self, *args, **kwargs):
         super().validate_unique(*args, **kwargs)
-        if self.__class__.objects.filter(school=self.school, course_code=self.course_code, title=self.title).exists():
+        duplicates = self.__class__.objects.filter(school=self.school, course_code=self.course_code, title=self.title)
+
+        if duplicates.exclude(id=self.id).exists():
             raise ValidationError(
                 message='A course with this school, code, and title already exists.',
                 code='Invalid Course',

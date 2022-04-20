@@ -108,3 +108,23 @@ def edit_school(request, school_id):
     context = {'school': school, 'form': form}
     return render(request, 'review_my_courses/edit_school.html', context)
 
+
+def edit_course(request, course_id):
+    """Edit an existing course."""
+    course = Course.objects.get(id=course_id)
+    school = course.school
+
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current school.
+        form = CourseForm(instance=course)
+    else:
+        # POST data submitted; process data.
+        form = CourseForm(instance=course, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('review_my_courses:school', school_id=school.id)
+
+    # Display a blank or invalid form
+    context = {'school': school, 'course': course, 'form': form}
+    return render(request, 'review_my_courses/edit_course.html', context)
+
