@@ -3,27 +3,60 @@
 {% block page_nav %}
     <li class="nav-item">
         <a class="nav-link active" aria-current="page"
-           href="{% url 'review_my_courses:schools' %}">View Schools</a>
+           href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a>
     </li>
 {% endblock page_nav %}
 
+{% block page_header %}
+    <h1>{{ school.name }}</h1>
+    <h2>{{ course.course_code }}: {{ course.title }}</h2>
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-10"><h3>Reviews</h3></div>
+            <div class="col-sm-2 text-end">
+                <a href="{% url 'review_my_courses:new_review' course.id %}" class="btn btn-outline-primary" role="button">Add New Review</a>
+            </div>
+        </div>
+    </div>
+{% endblock page_header %}
+
 {% block content %}
 
-    <p>School: <a href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a></p>
-    <p>Course Code: {{ course.course_code }}</p>
-    <p>Course Title: {{ course.title }}</p>
-    <p>Reviews</p>
-    <p><a href="{% url 'review_my_courses:new_review' course.id %}">Add a new review</a></p>
     {% for review in reviews %}
         <hr>
-        <p>Review Date: {{ review.review_date|date:'M d, Y' }}</p>
-        <p>Term: {{ review.term.title }} {{ review.year }}</p>
-        <p>Difficulty: {{ review.difficulty }}</p>
-        <p>Workload (hrs/week): {{ review.workload }}</p>
-        <p>Rating: {{ review.rating }}</p>
-        <p>Review: {{ review.text }}</p>
-        <p><a href="{% url 'review_my_courses:edit_review' review.id %}">Edit Review</a></p>
-        <p><a href="{% url 'review_my_courses:delete_review' review.id %}">Delete Review</a></p>
+        <div class="container bg-light border border-secondary">
+            <div class="row pt-2">
+                <div class="col-9">
+                    <p><b>{{ school.name }}</b> <br>
+                        <b>{{ course.course_code }}: {{ course.title }}</b> <br>
+                        <b>Term:</b> {{ review.term.title }} {{ review.year }} <br>
+                        <b>Reviewed:</b> {{ review.review_date|date:'M d, Y' }}
+                    </p>
+                </div>
+                <div class="col-3 text-end">
+                    <a href="{% url 'review_my_courses:edit_review' review.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'review_my_courses:delete_review' review.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2 p-2 text-center">
+                        <b>Workload</b>
+                        <div>{{ review.workload }} hours/week</div>
+                        <hr>
+                        <b>Difficulty</b>
+                        <div>{{ review.difficulty }} / 5</div>
+                        <hr>
+                        <b>Overall Rating</b>
+                        <div>{{ review.rating }} / 5</div>
+                </div>
+
+                <div class="col-10 p-2 ">
+                    <b>Review:</b> {{ review.text }}
+                </div>
+            </div>
+
+        </div>
+
     {% endfor %}
 
 {% endblock content %}
