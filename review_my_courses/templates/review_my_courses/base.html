@@ -25,7 +25,8 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page"
                  href="{% url 'review_my_courses:schools' %}">View Schools</a>
-            </li>bo
+            </li>
+            {% block page_nav %}{% endblock page_nav %}
           </ul>
         </div>
       </div>

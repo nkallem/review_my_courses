@@ -1,5 +1,12 @@
 {% extends 'review_my_courses/base.html' %}
 
+{% block page_nav %}
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page"
+           href="{% url 'review_my_courses:schools' %}">View Schools</a>
+    </li>
+{% endblock page_nav %}
+
 {% block content %}
 
     <p>School: <a href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a></p>
