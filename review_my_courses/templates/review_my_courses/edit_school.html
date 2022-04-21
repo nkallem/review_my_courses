@@ -1,11 +1,15 @@
 {% extends "review_my_courses/base.html" %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+    <h2>Edit school</h2>
+{% endblock page_header %}
 
 {% block content %}
-    <p>Edit school:</p>
     <form action="{% url 'review_my_courses:edit_school' school.id %}" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="submit">Save changes</button>
+        {% bootstrap_form form %}
+        <button name="submit" class="btn btn-primary">Save changes</button>
     </form>
 
-{% endblock %}
+{% endblock content %}
