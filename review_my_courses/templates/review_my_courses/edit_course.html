@@ -1,13 +1,23 @@
 {% extends "review_my_courses/base.html" %}
+{% load django_bootstrap5 %}
+
+{% block page_nav %}
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page"
+           href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a>
+    </li>
+{% endblock page_nav %}
+
+{% block page_header %}
+    <h2>Edit course</h2>
+{% endblock page_header %}
 
 {% block content %}
 
-    <p><a href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a></p>
-    <p>Edit course:</p>
     <form action="{% url 'review_my_courses:edit_course' course.id %}" method='post'>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name='submit'>Save changes</button>
+        {% bootstrap_form form %}
+        <button name='submit' class="btn btn-primary">Save changes</button>
     </form>
 
 {% endblock content %}
