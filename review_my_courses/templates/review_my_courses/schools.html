@@ -1,32 +1,46 @@
 {% extends 'review_my_courses/base.html' %}
 
 {% block content %}
+    <div class="table-wrapper">
+        <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-10"><h2>Schools</h2></div>
+                    <div class="col-sm-2">
+                        <a href="{% url 'review_my_courses:new_school' %}" class="btn btn-outline-primary" role="button">Add New School</a>
+                    </div>
+                </div>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>School Name</th>
+                    <th>Total Courses</th>
+                    <th>Total Reviews</th>
+                    <th>Difficulty (1-5)</th>
+                    <th>Workload (hrs/week)</th>
+                    <th>Rating (1-5)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
 
-    <p>Schools</p>
-    <p></p><a href="{% url 'review_my_courses:new_school' %}">Add a new school</a></p>
-    <br>
-    <table>
-        <tr>
-            <th colspan="3">School Name</th>
-            <th>Total Courses</th>
-            <th>Total Reviews</th>
-            <th>Difficulty (1-5)</th>
-            <th>Workload (hrs/week)</th>
-            <th>Rating (1-5)</th>
-        </tr>
-
-        {% for school in schools %}
-            <tr>
-                <td><a href="{% url 'review_my_courses:school' school.id %}">{{ school.name }}</a></td>
-                <td><a href="{% url 'review_my_courses:edit_school' school.id %}">Edit</a></td>
-                <td><a href="{% url 'review_my_courses:delete_school' school.id %}">Delete</a></td>
-                <td>{{ school.total_courses }}</td>
-                <td>{{ school.total_reviews }}</td>
-                <td>{{ school.average_difficulty|default_if_none:"N/A" }}</td>
-                <td>{{ school.average_workload|default_if_none:"N/A" }}</td>
-                <td>{{ school.average_rating|default_if_none:"N/A" }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+            <tbody>
+                {% for school in schools %}
+                    <tr>
+                        <td>{{ school.name }}</td>
+                        <td>{{ school.total_courses }}</td>
+                        <td>{{ school.total_reviews }}</td>
+                        <td>{{ school.average_difficulty|default_if_none:"N/A" }}</td>
+                        <td>{{ school.average_workload|default_if_none:"N/A" }}</td>
+                        <td>{{ school.average_rating|default_if_none:"N/A" }}</td>
+                        <td>
+                            <a href="{% url 'review_my_courses:school' school.id %}" class="btn btn-primary">View</a>
+                            <a href="{% url 'review_my_courses:edit_school' school.id %}" class="btn btn-warning">Edit</a>
+                            <a href="{% url 'review_my_courses:delete_school' school.id %}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock content %}
