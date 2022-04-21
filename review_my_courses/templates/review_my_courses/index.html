@@ -1,7 +1,12 @@
 {% extends 'review_my_courses/base.html' %}
 
-{% block content %}
+{% block page_header %}
+    <div class="jumbotron">
+        <h1 class="display-4">Review My Courses</h1>
+        <p class="lead">Read and review courses for any school. View comments and track the difficulty,
+            workload, and overall rating of each course.
+        </p>
+        <a class="btn btn-lg btn-primary" href="{% url 'review_my_courses:schools' %}" role="button">View Schools</a>
+    </div>
 
-<p>View and add new reviews for school courses.</p>
-
-{% endblock content %}
+{% endblock page_header %}
