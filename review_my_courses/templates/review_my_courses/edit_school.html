@@ -9,6 +9,7 @@
     <form action="{% url 'review_my_courses:edit_school' school.id %}" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
+        <a href="{% url 'review_my_courses:schools' %}" id="cancel" class="btn btn-outline-primary">Cancel</a>
         <button name="submit" class="btn btn-primary">Save changes</button>
     </form>
 
