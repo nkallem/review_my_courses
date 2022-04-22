@@ -24,5 +24,5 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['term', 'year', 'workload', 'difficulty', 'rating', 'text']
-        labels = {'text': 'Review'}
+        labels = {'text': 'Review', 'workload': 'Workload (hrs/week)'}
         widgets = {'text': forms.Textarea(attrs={'cols': 80})}
