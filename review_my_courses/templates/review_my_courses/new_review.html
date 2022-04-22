@@ -20,6 +20,7 @@
     <form action="{% url 'review_my_courses:new_review' course.id %}" method='post'>
         {% csrf_token %}
         {% bootstrap_form form %}
+        <a href="{% url 'review_my_courses:course' course.id %}" id="cancel" class="btn btn-outline-primary">Cancel</a>
         <button name="submit" class="btn btn-primary">Submit review</button>
     </form>
 
